@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xiaodashuai.spring2.learndemo.dao.MygameDao">
+
+    <!--    查询带分页  -->
+    <select id="queryGame"
+            resultType="java.lang.Long"
+            parameterType="Mygame">
+        select count(*) from mygame
+        <where>
+            <if test="mname !=null and mname != ''">
+                and gname=#{gname}
+            </if>
+        </where>
+    </select>
+
+    <!--    查询 -->
+    <select id="queryGame"
+            resultType="Mygame"
+            parameterType="Mygame">
+        select * from mygame
+        <where>
+            <if test="mname !=null and mname != ''">
+                and gname=#{gname}
+            </if>
+        </where>
+    </select>
+
+
+    <!--    查询带id  -->
+    <select id="queryGameById"
+            resultType="Mygame"
+            parameterType="int">
+        select * from mygame
+        where gid=#{gid}
+    </select>
+
+    <!-- =====================================================查询分割线================================================== -->
+
+    <insert id="addGame" parameterType="Mygame">
+        insert into mygame(gname,info,addtime)
+        set gname=#{ganme},info=#{info},addtime=#{addtime}
+    </insert>
+
+    <delete id="delGame" parameterType="Mygame">
+        delete from mygame
+        where gid=#{gid}
+    </delete>
+
+    <update id="updateGame" parameterType="Mygame">
+        update mygame
+        set gname=#{gname},info=#{info},addtime=#{addtime}
+        where gid=#{gid}
+    </update>
+
+</mapper>
